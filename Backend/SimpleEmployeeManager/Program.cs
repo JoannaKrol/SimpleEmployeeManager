@@ -1,6 +1,8 @@
-
 using Microsoft.EntityFrameworkCore;
 using SimpleEmployeeManager.Data;
+using SimpleEmployeeManager.Mapping;
+using SimpleEmployeeManager.Services;
+using SimpleEmployeeManager.Validators;
 
 namespace SimpleEmployeeManager
 {
@@ -11,6 +13,7 @@ namespace SimpleEmployeeManager
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddAutoMapper(typeof(EmployeeMapper));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,6 +23,9 @@ namespace SimpleEmployeeManager
             builder.Services.AddDbContext<EmployeesDbContext>(
                     option => option.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeConnectionString"))
                 );
+
+            builder.Services.AddScoped<IEmployeesValidator,  EmployeesValidator>();
+            builder.Services.AddScoped<IEmployeesService, EmployeesService>();
 
             var app = builder.Build();
 

@@ -1,8 +1,17 @@
-﻿namespace SimpleEmployeeManager.Enums
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+namespace SimpleEmployeeManager.Enums
 {
     public enum Sex
     {
-        Male = 'M',
-        Female = 'F'
+        Male = 1,
+        Female = 2
+    }
+    public class SexConverter : ValueConverter<Sex, string>
+    {
+        public SexConverter() : base(
+            status => status.ToString(),
+            status => Enum.Parse<Sex>(status)
+        ) { }
     }
 }
