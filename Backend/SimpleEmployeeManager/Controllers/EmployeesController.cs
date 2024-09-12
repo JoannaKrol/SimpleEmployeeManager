@@ -43,7 +43,7 @@ namespace SimpleEmployeeManager.Controllers
             }
         }
 
-        [HttpPost("EditEmployee")]
+        [HttpPost("UpdateEmployee")]
         public IActionResult UpdateEmployee([FromBody] Employee employee)
         {
             try

@@ -1,9 +1,8 @@
-import React from 'react';
-import EmployeeComponent from './components/EmployeeComponent';
+import EmployeeComponent from './Components/EmployeeComponent';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <EmployeeComponent />
     </div>
   );
