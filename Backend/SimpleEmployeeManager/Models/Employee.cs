@@ -1,6 +1,6 @@
 ﻿using SimpleEmployeeManager.Enums;
 
-namespace SimpleEmployeeManager.Entites
+namespace SimpleEmployeeManager.Models
 {
     public class Employee
     {

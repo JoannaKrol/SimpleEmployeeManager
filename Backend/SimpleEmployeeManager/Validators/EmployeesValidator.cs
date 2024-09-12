@@ -1,5 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SimpleEmployeeManager.Entites;
+using SimpleEmployeeManager.Models;
 
 namespace SimpleEmployeeManager.Validators
 {
@@ -12,7 +12,7 @@ namespace SimpleEmployeeManager.Validators
     {
         public bool ValidateEmployee(Employee employee, out List<string> errorMessages)
         {
-            errorMessages = new();
+            errorMessages = [];
 
             if (employee.FirstName.IsNullOrEmpty())
                 errorMessages.Add("FirstName must by specify");
@@ -24,10 +24,10 @@ namespace SimpleEmployeeManager.Validators
             else if (employee.LastName.Length > 256)
                 errorMessages.Add("Max length of LastName is 256 characters");
 
-            if (employee.Age < 18 || employee.Age > 100)
+            if (employee.Age is < 18 or > 100)
                 errorMessages.Add("Age must by between 18 and 100");
 
-            return !errorMessages.Any();
+            return errorMessages.Count == 0;
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SimpleEmployeeManager.Entites;
+using SimpleEmployeeManager.Models;
 
 namespace SimpleEmployeeManager.Mapping
 {

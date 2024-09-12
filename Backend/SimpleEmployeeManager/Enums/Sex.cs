@@ -7,11 +7,8 @@ namespace SimpleEmployeeManager.Enums
         Male = 1,
         Female = 2
     }
-    public class SexConverter : ValueConverter<Sex, string>
-    {
-        public SexConverter() : base(
-            status => status.ToString(),
-            status => Enum.Parse<Sex>(status)
-        ) { }
-    }
+    public class SexConverter() : ValueConverter<Sex, string>(
+        status => status.ToString(),
+        status => Enum.Parse<Sex>(status)
+    );
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SimpleEmployeeManager.Entites;
+using SimpleEmployeeManager.Models;
 using SimpleEmployeeManager.Services;
 
 namespace SimpleEmployeeManager.Controllers
@@ -57,7 +57,7 @@ namespace SimpleEmployeeManager.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public IActionResult DeleteEmployee(Guid id)
         {
             try

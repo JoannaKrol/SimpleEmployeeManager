@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SimpleEmployeeManager.Data;
-using SimpleEmployeeManager.Entites;
+using SimpleEmployeeManager.Models;
 using SimpleEmployeeManager.Validators;
-using System;
 
 namespace SimpleEmployeeManager.Services
 {
@@ -13,7 +12,7 @@ namespace SimpleEmployeeManager.Services
         void AddEmployee(Employee employee);
         void UpdateEmployee(Employee employee);
         void DeleteEmployee(Guid employeeId);
-        void DeleteManyEmployees(List<Guid> emplyeeIdsToDelete);
+        void DeleteManyEmployees(List<Guid> employeeIdsToDelete);
     }
     public class EmployeesService : IEmployeesService
     {
@@ -72,12 +71,11 @@ namespace SimpleEmployeeManager.Services
             _employeesDbContext.SaveChanges();
         }
 
-        public void DeleteManyEmployees(List<Guid> emplyeeIdsToDelete)
+        public void DeleteManyEmployees(List<Guid> employeeIdsToDelete)
         {
-            List<Guid> notFoundGuids = new();
-            List<Employee> employeeToDelete = new();
+            List<Guid> notFoundGuids = [];
 
-            foreach (var employeeId in emplyeeIdsToDelete)
+            foreach (var employeeId in employeeIdsToDelete)
             {
                 var existingEmployee = _employeesDbContext.Employees.Find(employeeId);
 
@@ -87,7 +85,7 @@ namespace SimpleEmployeeManager.Services
                     _employeesDbContext.Employees.Remove(existingEmployee);
             }
 
-            if (notFoundGuids.Any())
+            if (notFoundGuids.Count > 0)
             {
                 var changesToRollback = _employeesDbContext.ChangeTracker.Entries();
 

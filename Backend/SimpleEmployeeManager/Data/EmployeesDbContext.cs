@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SimpleEmployeeManager.Entites;
 using SimpleEmployeeManager.Enums;
 using SimpleEmployeeManager.Generators;
+using SimpleEmployeeManager.Models;
 
 namespace SimpleEmployeeManager.Data
 {
