@@ -24,6 +24,17 @@ namespace SimpleEmployeeManager
                     option => option.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeConnectionString"))
                 );
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigins",
+                    policyBuilder =>
+                    {
+                        policyBuilder.WithOrigins([.. builder.Configuration.GetSection("AllowedUrls").Get<List<string>>()])
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
             builder.Services.AddScoped<IEmployeesValidator,  EmployeesValidator>();
             builder.Services.AddScoped<IEmployeesService, EmployeesService>();
 
@@ -36,8 +47,9 @@ namespace SimpleEmployeeManager
                 app.UseSwaggerUI();
             }
 
-            app.UseAuthorization();
+            app.UseCors("AllowSpecificOrigins");
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
