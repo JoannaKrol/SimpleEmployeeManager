@@ -5,7 +5,7 @@ type Employee = {
   firstName: string;
   lastName: string;
   age?: number;
-  sex: Sex;
+  sex: Sex | '';
 }
 
 export default Employee

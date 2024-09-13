@@ -1,4 +1,4 @@
-import EmployeeComponent from './Components/EmployeeComponent';
+import EmployeeComponent from './Components/EmployeeList.Component';
 
 function App() {
   return (

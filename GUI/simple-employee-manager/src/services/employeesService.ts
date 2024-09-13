@@ -12,7 +12,7 @@ export const getAllEmployee = async (): Promise<Employee[]> => {
     });
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error('getAllEmployee - error:', error);
     throw error;
   }
 };
@@ -25,7 +25,7 @@ export const addEmployee = async (employee: Employee): Promise<void> => {
       },
     });
   } catch (error) {
-    console.error('Błąd podczas dodawania pracownika:', error);
+    console.error('addEmployee - error:', error);
     throw error;
   }
 };
@@ -38,7 +38,7 @@ export const updateEmployee = async (employee: Employee): Promise<void> => {
       },
     });
   } catch (error) {
-    console.error('Błąd podczas aktualizacji pracownika:', error);
+    console.error('updateEmployee - error:', error);
     throw error;
   }
 };
@@ -51,7 +51,7 @@ export const deleteEmployee = async (employeeId: string): Promise<void> => {
       },
     });
   } catch (error) {
-    console.error('Błąd podczas usuwania pracownika:', error);
+    console.error('deleteEmployee - Error:', error);
     throw error;
   }
 };
@@ -64,7 +64,7 @@ export const deleteEmployees = async (employeeIds: string[]): Promise<void> => {
       },
     });
   } catch (error) {
-    console.error('Błąd podczas usuwania wielu pracowników:', error);
+    console.error('deleteEmployees - Error: ', error);
     throw error;
   }
 };
