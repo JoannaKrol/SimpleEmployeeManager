@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { TextField, Button, MenuItem, Select, InputLabel, FormControl, FormHelperText, Box, Dialog, DialogActions, DialogContent, DialogTitle, SelectChangeEvent, Stack } from '@mui/material';
 import Employee from '../Types/Employee';
 import Sex from '../Types/Sex';
@@ -6,11 +6,11 @@ import Sex from '../Types/Sex';
 type EmployeeFormProps = {
   open: boolean;
   employeeToEdit: Employee | null;
-  onClose: () => void;
+  onCancel: () => void;
   onSubmit: (employee: Employee) => void;
 };
 
-const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onClose, onSubmit }) => {
+const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onCancel, onSubmit }) => {
   const [formData, setFormData] = useState<Employee>({
     firstName: '',
     lastName: '',
@@ -31,8 +31,18 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onClo
     }
   }, [employeeToEdit]);
 
-  const handleChange = (e: SelectChangeEvent<Sex> | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
+  const handleChange = (e: SelectChangeEvent<Sex> | ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
     const { name, value } = e.target;
+
+    // Remove value from age if not specify
+    if(name === 'age' && value === '') {
+      setFormData({
+        ...formData,
+        age: undefined,
+      });
+      return;
+    }
+
     setFormData({
       ...formData,
       [name as keyof Employee]: value,
@@ -47,7 +57,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onClo
     const newErrors = {
       firstName: firstName === '',
       lastName: lastName === '',
-      sex: sex === undefined,
+      sex: !Object.values(Sex).includes(sex),
       age: age !== undefined && (+age < 18 || +age > 100),
     };
 
@@ -57,11 +67,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onClo
 
     if (!hasErrors) {
       onSubmit(formData);
-      handleClose();
+      handleCancel();
     }
   };
 
-  const handleClose = () => {
+  const handleCancel = () => {
     setFormData({
       firstName: '',
       lastName: '',
@@ -74,11 +84,11 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onClo
       sex: false,
       age: false
     });
-    onClose();
+    onCancel();
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={handleCancel}>
       <DialogTitle>{employeeToEdit ? 'Employee edit' : 'Employee add'}</DialogTitle>
       <DialogContent>
         <Box
@@ -119,11 +129,12 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onClo
             fullWidth
           />
 
-          <FormControl fullWidth error={errors.sex}>
+          <FormControl fullWidth error={errors.sex} required>
             <InputLabel id="sex-label">Sex</InputLabel>
             <Select
               labelId="sex-label"
               name="sex"
+              label="Sex"
               value={formData.sex}
               onChange={handleChange}
               required
@@ -137,7 +148,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ open, employeeToEdit, onClo
       </DialogContent>
       <DialogActions>
         <Stack spacing={2} direction="row">
-          <Button onClick={handleClose} color="primary" variant="outlined">
+          <Button onClick={handleCancel} color="primary" variant="outlined">
             Cancel
           </Button>
           <Button onClick={handleSubmit} color="primary" variant="contained">

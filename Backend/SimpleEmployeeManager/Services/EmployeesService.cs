@@ -37,7 +37,7 @@ namespace SimpleEmployeeManager.Services
             ArgumentNullException.ThrowIfNull(employee);
 
             if (!_employeesValidator.ValidateEmployee(employee, out List<string> errorMessages))
-                throw new ArgumentException($"Employee data is not valid. Error list \n{string.Join($"\t{Environment.NewLine}", errorMessages)}");
+                throw new ArgumentException($"Employee data is not valid. Error list: \n{string.Join($"{Environment.NewLine}", errorMessages)}");
 
             var existingEmployee = _employeesDbContext.Employees.Find(employee.Id);
             if(existingEmployee != null)

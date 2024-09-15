@@ -10,8 +10,8 @@ type EmployeeItemProps = {
   index: number;
   selectedIds: string[];
   handleToggle: (id: string) => void;
-  handleUpdateEmployee: (employee: Employee) => void;
-  handleEmployeeDeleteClick: (id: string) => void;
+  handleUpdate: (employee: Employee) => void;
+  handleDelete: (id: string) => void;
   isLoading: boolean;
 };
 
@@ -20,8 +20,8 @@ const EmployeeItem: React.FC<EmployeeItemProps> = ({
   index,
   selectedIds,
   handleToggle,
-  handleUpdateEmployee,
-  handleEmployeeDeleteClick,
+  handleUpdate,
+  handleDelete,
   isLoading,
 }) => {
   const fullName = `${employee.firstName} ${employee.lastName}`;
@@ -41,7 +41,7 @@ const EmployeeItem: React.FC<EmployeeItemProps> = ({
       <IconButton
         aria-label="edit"
         color="primary"
-        onClick={() => handleUpdateEmployee(employee)}
+        onClick={() => handleUpdate(employee)}
         style={{ marginRight: '10px' }}
         disabled={isLoading}
       >
@@ -50,7 +50,7 @@ const EmployeeItem: React.FC<EmployeeItemProps> = ({
       <IconButton
         aria-label="delete"
         color="primary"
-        onClick={() => handleEmployeeDeleteClick(employee.id!)}
+        onClick={() => handleDelete(employee.id!)}
         style={{ marginRight: '10px' }}
         disabled={isLoading}
       >

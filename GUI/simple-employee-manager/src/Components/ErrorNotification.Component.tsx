@@ -25,6 +25,13 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({ error, clearError
     clearError();
   };
 
+  const formatText = (text: string) => {
+    return text
+      .replace(/\\r/g, '')
+      .replace(/\\t/g, '')
+      .replace(/\\n/g, '<br />');
+  };
+
   return (
     <Snackbar
       open={error !== ""}
@@ -37,7 +44,7 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({ error, clearError
       }
     >
       <Alert onClose={handleClose} severity="error">
-        {error}
+        <span dangerouslySetInnerHTML={{ __html: formatText(error) }} />
       </Alert>
     </Snackbar>
   );

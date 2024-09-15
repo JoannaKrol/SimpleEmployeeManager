@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import EmployeeListState from '../Types/EmployeeListState';
 import Employee from '../Types/Employee';
+
+type EmployeeListState = {
+  employees: Employee[];
+  isLoading: boolean;
+  error: string | null;
+}
 
 const initialState: EmployeeListState = {
   employees: [],

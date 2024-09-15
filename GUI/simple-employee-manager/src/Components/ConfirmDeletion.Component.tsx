@@ -3,27 +3,27 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/
 type ConfirmDeletionProps = {
   open: boolean;
   question: string;
-  handleCancelDelete: () => void;
-  handleConfirmDelete: () => void;
+  onCancel: () => void;
+  onConfirm: () => void;
 };
 
-const ConfirmDeletion: React.FC<ConfirmDeletionProps> = ({ open, question, handleCancelDelete, handleConfirmDelete }) => {
+const ConfirmDeletion: React.FC<ConfirmDeletionProps> = ({ open, question, onCancel, onConfirm }) => {
 
   return (
 
     <Dialog
       open={open}
-      onClose={handleCancelDelete}
+      onClose={onCancel}
     >
       <DialogTitle>Confirm Deletion</DialogTitle>
       <DialogContent>
         {question}
       </DialogContent>
       <DialogActions>
-        <Button  onClick={handleCancelDelete} color="primary" variant="outlined">
+        <Button  onClick={onCancel} color="primary" variant="outlined">
           Cancel
         </Button>
-        <Button onClick={handleConfirmDelete} color="primary" variant="contained">
+        <Button onClick={onConfirm} color="primary" variant="contained">
           Confirm
         </Button>
       </DialogActions>
