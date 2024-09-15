@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
 import { List, Button, Box, Paper, Stack, CircularProgress } from '@mui/material';
 import { AppDispatch, RootState } from '../Redux/store';
-import { fetchInit, fetchEmployees, fetchError } from '../Redux/EmployeeSlice'
-import { addEmployee, deleteEmployee, deleteEmployees, getAllEmployee, updateEmployee } from '../Services/EmployeesService';
+import { fetchInit, fetchEmployees, fetchError } from '../Redux/employeeSlice'
+import { addEmployee, deleteEmployee, deleteEmployees, getAllEmployee, updateEmployee } from '../Services/employeesService';
 import Employee from '../Types/Employee';
 import EmployeeItem from './EmployeeItem.Component';
 import EmployeeForm from './EmployeeForm.Component';

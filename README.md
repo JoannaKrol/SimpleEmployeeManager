@@ -23,6 +23,7 @@ A simple application for managing a database of employees via a user interface.
 2. Into `appsettings.Development.json` configure `EmployeeConnectionString` to your SQL Server instance
 3. Make sure you don't have `Employees` database into your SQL Server instance
 4. Into Nuget Package Manager Console run command `Add-Migration InitialMigration` and then `Update-Database`
+5. Run solution as `http` 
 
 ### Frontend
 1. Into GUI/simple-employee-manager folder run command `npm install` and then `npm start`
